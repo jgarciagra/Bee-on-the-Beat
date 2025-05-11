@@ -9,14 +9,14 @@ public class EnemyContoller : MonoBehaviour
     public enum PatternType { UpDown, Square, Square2, LeftRight }
     public PatternType pattern;
 
-    public int beatsPerMove = 2; // Moverse cada 1, 2, 3 beats...
+    public int beatsPerMove = 2; 
     private int beatCounter = 0;
 
     public float moveDistance = 1f;
 
     private bool movingRight = true;
 
-    // o dirección aleatoria
+    
 
     private int squareStep = 0;
     private int squareStep2 = 1;
