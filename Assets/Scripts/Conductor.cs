@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[DefaultExecutionOrder(-100)]
 
 public class Conductor : MonoBehaviour
 {
@@ -9,10 +10,7 @@ public class Conductor : MonoBehaviour
     public float songBpm;
     public float secPerBeat;
     public float songPosition;
-    //public float songPositionInBeats;
-    //public float dspSongTime;
-
-    //public float beatsShownInAdvance;
+    
 
     public float songStart;
     public event Action OnBeat;
@@ -23,25 +21,18 @@ public class Conductor : MonoBehaviour
 
     int currentBeat;
 
-    public float audioOffset = 0.1f;
-
-    //public class Note
-    //{
-    //    public float beat;
-    //    public float position;
-    //}
-
-    //public Note[] notes;
-
-    //int nextIndex;
+    public float audioOffset = 0.1f;    
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
         else Destroy(gameObject);
     }
 
-    // Start is called before the first frame update
+    
     void Start()
     {
 
@@ -50,14 +41,12 @@ public class Conductor : MonoBehaviour
         songStart = Time.time;
         musicSource.Play();
 
-
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        songPosition = Time.time - songStart - audioOffset;
-        //songPositionInBeats = songPosition / secPerBeat;
+        songPosition = Time.time - songStart - audioOffset;        
 
         currentBeat = Mathf.FloorToInt(songPosition / secPerBeat);
         if (currentBeat > beatCount)

@@ -6,19 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class EnemyContoller : MonoBehaviour
 {
+    public enum PatternType { UpDown, Square, Square2, LeftRight }
+    public PatternType pattern;
+
     public int beatsPerMove = 2; // Moverse cada 1, 2, 3 beats...
     private int beatCounter = 0;
 
     public float moveDistance = 1f;
 
-    private Vector2 currentDirection = Vector2.right; // o dirección aleatoria
+    private bool movingRight = true;
+
+    // o dirección aleatoria
+
+    private int squareStep = 0;
+    private int squareStep2 = 1;
+
+    private Vector2Int[] squarePattern = new Vector2Int[]
+    {
+    Vector2Int.up,
+    Vector2Int.right,
+    Vector2Int.down,
+    Vector2Int.left
+    };
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-
-            StartCoroutine(RestartLevel());
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -45,22 +61,70 @@ public class EnemyContoller : MonoBehaviour
     }
 
     void Move()
-    {      
+    {
+
+        Vector2Int direction = Vector2Int.zero;
+        
+
+        
+            switch (pattern)
+            {
+                case PatternType.UpDown:
+                    if (movingRight)
+                    {
+                        direction = Vector2Int.up;
+                    }
+                    else
+                    {
+                        direction = Vector2Int.down;
+                    }
+                    movingRight = !movingRight;
+
+                    break;
+
+                case PatternType.Square:
                 
-        currentDirection = GetRandomDirection();
-        transform.position += (Vector3)currentDirection * moveDistance;
+                direction = squarePattern[squareStep];
+                squareStep = (squareStep + 1);
+                if (squareStep == 4)
+                {
+                    squareStep -= 4;
+                }
+                break;
+
+            case PatternType.Square2:
+                
+                direction = squarePattern[squareStep2];
+                squareStep2 = (squareStep2 + 1) % squarePattern.Length;
+                if (squareStep2 == 4)
+                {
+                    squareStep2 -= 4;
+                }
+                break;
+
+            case PatternType.LeftRight:
+
+
+                if (movingRight)
+                {
+                    direction = Vector2Int.right;
+                }
+                else
+                {
+                    direction = Vector2Int.left;
+                }
+                movingRight = !movingRight;
+
+                break;
+        }
+
+
+        
+            transform.position += (Vector3)(Vector2)direction * moveDistance;
+        
     }
 
-    Vector2 GetRandomDirection()
-    {
-        System.Random alea = new System.Random();
-        Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
-        return directions[alea.Next(0, directions.Length)];
-    }
+    
 
-    IEnumerator RestartLevel()
-    {
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+
 }
