@@ -6,23 +6,14 @@ using UnityEngine.UIElements;
 
 public class BeatIndicator : MonoBehaviour
 {
-    private UnityEngine.UI.Image image;
+    public UnityEngine.UI.Image beatFillImage;
 
-    void Start()
+    void Update()
     {
-        image = GetComponent<UnityEngine.UI.Image>();
-        Conductor.Instance.OnBeat += Flash;
-    }
+        if (Conductor.Instance == null || beatFillImage == null)
+            return;
 
-    void Flash()
-    {
-        StartCoroutine(FlashCoroutine());
-    }
-
-    System.Collections.IEnumerator FlashCoroutine()
-    {
-        image.color = Color.yellow;
-        yield return new WaitForSeconds(0.1f);
-        image.color = Color.white;
+        float progress = Conductor.Instance.GetBeatProgress();
+        beatFillImage.fillAmount = progress;
     }
 }

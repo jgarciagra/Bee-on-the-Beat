@@ -70,4 +70,9 @@ public class Conductor : MonoBehaviour
         songPosition = Time.time - songStart;
         return songPosition % secPerBeat;
     }
+
+    public float GetBeatProgress()
+    {
+        return ((Time.time - songStart - audioOffset) % secPerBeat) / secPerBeat;
+    }
 }
