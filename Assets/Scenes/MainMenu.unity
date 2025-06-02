@@ -226,7 +226,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -9015621148454130328, guid: 17f7c0b69e23d4546bd9ec7ef89f48db, type: 3}
+  m_Sprite: {fileID: -491548422393011188, guid: 17f7c0b69e23d4546bd9ec7ef89f48db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -659,8 +659,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1365183985}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: PlayGame
+        m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
+        m_MethodName: GoToLevelMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -690,7 +690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7682773781383931424, guid: 17f7c0b69e23d4546bd9ec7ef89f48db, type: 3}
+  m_Sprite: {fileID: 1090812924610278514, guid: 17f7c0b69e23d4546bd9ec7ef89f48db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -810,7 +810,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1365183981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40323e2417cd7d4fa089d09a1ab6f12, type: 3}
+  m_Script: {fileID: 11500000, guid: fc0254872cc6b7241a23e8de68f3287f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1398133948

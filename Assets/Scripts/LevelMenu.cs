@@ -9,6 +9,10 @@ public class LevelMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(0);
     }
+    public void GoToLevelMenu()
+    {
+        SceneManager.LoadSceneAsync(1);
+    }
     public void GoToLevelOne()
     {
         SceneManager.LoadSceneAsync(2);
@@ -20,5 +24,9 @@ public class LevelMenu : MonoBehaviour
     public void GoToLevelThree()
     {
         SceneManager.LoadSceneAsync(4);
+    }
+    public void GoToSettingsMenu()
+    {
+        SceneManager.LoadSceneAsync(5);
     }
 }
