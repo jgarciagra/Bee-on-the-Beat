@@ -67,7 +67,7 @@ public class Conductor : MonoBehaviour
 
     public float GetTimeSinceLastBeat()
     {
-        songPosition = Time.time - songStart;
+        songPosition = Time.time - songStart - audioOffset; ;
         return songPosition % secPerBeat;
     }
 
