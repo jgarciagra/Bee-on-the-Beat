@@ -43,4 +43,19 @@ public class LevelMenu : MonoBehaviour
             Debug.LogWarning("No previous level stored.");
         }
     }
+    public void GoToNextLevel()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+               
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadSceneAsync(nextSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("No next level found. You might be at the last level.");
+        }
+    }
+
 }
