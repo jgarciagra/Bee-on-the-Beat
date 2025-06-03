@@ -2088,9 +2088,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 519420028}
+      - m_Target: {fileID: 684942634}
         m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: GoToSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -611,7 +611,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 800236800}
         m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
         m_MethodName: GoToSettingsMenu
         m_Mode: 1
@@ -2470,7 +2470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d44647b02988945890b3422ffa6c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextScene: Final
+  nextScene: 
 --- !u!4 &1215056268
 Transform:
   m_ObjectHideFlags: 0
