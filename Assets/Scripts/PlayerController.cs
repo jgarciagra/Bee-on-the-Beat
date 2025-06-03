@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static ScoreManager;
 
 
 public class PlayerController : MonoBehaviour
@@ -42,14 +43,32 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) inputDirection = Vector2.right;
 
         if (inputDirection != Vector2.zero)
-        {
-            if (Conductor.Instance.GetTimeSinceLastBeat() <= beatLeeway)
+        {            
+            float distanceToBeat = Mathf.Min(Conductor.Instance.GetTimeSinceLastBeat(), Conductor.Instance.secPerBeat - Conductor.Instance.GetTimeSinceLastBeat());
+
+            if (distanceToBeat <= beatLeeway)
             {
+                HitAccuracy accuracy;
+
+                if (distanceToBeat < 0.07f)
+                    accuracy = HitAccuracy.Perfect;
+                else if (distanceToBeat < 0.15f)
+                    accuracy = HitAccuracy.Good;
+                else
+                    accuracy = HitAccuracy.Miss;
+
+                ScoreManager.Instance.RegisterHit(accuracy);                
+            
                 Vector2 targetPosition = rb.position + inputDirection.normalized * moveDistance;
                 if (!IsBlocked(inputDirection))
                 {
                     rb.MovePosition(targetPosition);
                 }
+                canMove = false;
+            }
+            else
+            {
+                ScoreManager.Instance.RegisterHit(HitAccuracy.Miss);
                 canMove = false;
             }
             
