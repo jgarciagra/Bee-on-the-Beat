@@ -32,6 +32,10 @@ public class LevelMenu : MonoBehaviour
         previousLevelIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadSceneAsync(5);
     }
+    public void ScoreScreen()
+    {
+        SceneManager.LoadSceneAsync(6);
+    }
     public void ReturnToPreviousLevel()
     {
         if (previousLevelIndex >= 0)
