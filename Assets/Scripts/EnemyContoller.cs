@@ -96,13 +96,12 @@ public class EnemyContoller : MonoBehaviour
                 if (contactTimer >= contactThreshold)
                 {
                     float distance = Vector2.Distance(transform.position, playerRef.transform.position);
-                    if (distance < 0.1f) // tolerancia ajustable
+                    if (distance < 0.1f) 
                     {
                         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                     }
                     else
-                    {
-                        // Se separaron antes de tiempo, no contar colisión
+                    {                        
                         contactTimer = 0f;
                         playerInside = false;
                     }
