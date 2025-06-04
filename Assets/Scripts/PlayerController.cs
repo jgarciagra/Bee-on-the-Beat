@@ -5,17 +5,16 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using static ScoreManager;
 
-
 public class PlayerController : MonoBehaviour
 {
     public float moveDistance = 1f;
     public float beatLeeway = 0.4f;
-   
-    private Vector2 inputDirection;
+    public float moveDuration = 0.15f;
+
     private bool canMove = false;
+    private bool isMoving = false;
 
     private Rigidbody2D rb;
-
 
     void OnEnable()
     {
@@ -32,9 +31,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (!canMove) return;
+        if (!canMove || isMoving) return;
 
         Vector2 inputDirection = Vector2.zero;
 
@@ -44,13 +43,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D)) inputDirection = Vector2.right;
 
         if (inputDirection != Vector2.zero)
-        {            
-            float distanceToBeat = Mathf.Min(Conductor.Instance.GetTimeSinceLastBeat(), Conductor.Instance.secPerBeat - Conductor.Instance.GetTimeSinceLastBeat());
+        {
+            float distanceToBeat = Mathf.Min(
+                Conductor.Instance.GetTimeSinceLastBeat(),
+                Conductor.Instance.secPerBeat - Conductor.Instance.GetTimeSinceLastBeat()
+            );
 
             if (distanceToBeat <= beatLeeway)
             {
                 HitAccuracy accuracy;
-
                 if (distanceToBeat < 0.07f)
                     accuracy = HitAccuracy.Perfect;
                 else if (distanceToBeat < 0.15f)
@@ -58,13 +59,14 @@ public class PlayerController : MonoBehaviour
                 else
                     accuracy = HitAccuracy.Miss;
 
-                ScoreManager.Instance.RegisterHit(accuracy);                
-            
-                Vector2 targetPosition = rb.position + inputDirection.normalized * moveDistance;
+                ScoreManager.Instance.RegisterHit(accuracy);
+
                 if (!IsBlocked(inputDirection))
                 {
-                    rb.MovePosition(targetPosition);
+                    Vector2 targetPosition = rb.position + inputDirection.normalized * moveDistance;
+                    StartCoroutine(LerpMove(targetPosition));
                 }
+
                 canMove = false;
             }
             else
@@ -72,7 +74,6 @@ public class PlayerController : MonoBehaviour
                 ScoreManager.Instance.RegisterHit(HitAccuracy.Miss);
                 canMove = false;
             }
-            
         }
     }
 
@@ -87,4 +88,20 @@ public class PlayerController : MonoBehaviour
         return hit.collider != null;
     }
 
+    IEnumerator LerpMove(Vector2 targetPosition)
+    {
+        isMoving = true;
+        Vector2 startPosition = rb.position;
+        float elapsed = 0f;
+
+        while (elapsed < moveDuration)
+        {
+            rb.MovePosition(Vector2.Lerp(startPosition, targetPosition, elapsed / moveDuration));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.MovePosition(targetPosition);
+        isMoving = false;
+    }
 }
