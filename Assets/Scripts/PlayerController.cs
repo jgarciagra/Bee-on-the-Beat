@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
                 ScoreManager.Instance.RegisterHit(accuracy);
 
-                if (!IsBlocked(inputDirection))
+                if (accuracy != HitAccuracy.Miss && !IsBlocked(inputDirection))
                 {
                     Vector2 targetPosition = rb.position + inputDirection.normalized * moveDistance;
                     StartCoroutine(LerpMove(targetPosition));
@@ -103,5 +103,10 @@ public class PlayerController : MonoBehaviour
 
         rb.MovePosition(targetPosition);
         isMoving = false;
+    }
+
+    public bool IsMoving()
+    {
+        return isMoving;
     }
 }

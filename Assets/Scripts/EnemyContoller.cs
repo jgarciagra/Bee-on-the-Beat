@@ -33,12 +33,37 @@ public class EnemyContoller : MonoBehaviour
     private Vector3 targetPosition;
     private float moveTimer = 0f;
 
+    private float contactTimer = 0f;
+    private float contactThreshold = 0.01f;
+    private bool playerInside = false;
+    private PlayerController playerRef;
+
     void OnTriggerEnter2D(Collider2D other)
+    {
+        /*if (other.CompareTag("Player"))
+        {
+            PlayerController player = other.GetComponent<PlayerController>();
+
+            if (player != null && !player.IsMoving())
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+        */
+        if (other.CompareTag("Player"))
+        {
+            playerRef = other.GetComponent<PlayerController>();
+            playerInside = true;
+            contactTimer = 0f;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            playerInside = false;
+            contactTimer = 0f;
         }
     }
 
@@ -63,6 +88,25 @@ public class EnemyContoller : MonoBehaviour
             if (t >= 1f)
             {
                 isMoving = false;
+            }
+
+            if (!playerRef.IsMoving() && !isMoving)
+            {
+                contactTimer += Time.deltaTime;
+                if (contactTimer >= contactThreshold)
+                {
+                    float distance = Vector2.Distance(transform.position, playerRef.transform.position);
+                    if (distance < 0.1f) // tolerancia ajustable
+                    {
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    }
+                    else
+                    {
+                        // Se separaron antes de tiempo, no contar colisión
+                        contactTimer = 0f;
+                        playerInside = false;
+                    }
+                }
             }
         }
     }
