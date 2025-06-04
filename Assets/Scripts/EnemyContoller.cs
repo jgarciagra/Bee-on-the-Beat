@@ -9,14 +9,13 @@ public class EnemyContoller : MonoBehaviour
     public enum PatternType { UpDown, Square, Square2, LeftRight }
     public PatternType pattern;
 
-    public int beatsPerMove = 2; 
+    public int beatsPerMove = 2;
     private int beatCounter = 0;
 
     public float moveDistance = 1f;
+    public float moveDuration = 0.15f;
 
     private bool movingRight = true;
-
-    
 
     private int squareStep = 0;
     private int squareStep2 = 1;
@@ -29,11 +28,16 @@ public class EnemyContoller : MonoBehaviour
     Vector2Int.left
     };
 
+    private bool isMoving = false;
+    private Vector3 startPosition;
+    private Vector3 targetPosition;
+    private float moveTimer = 0f;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
@@ -47,43 +51,60 @@ public class EnemyContoller : MonoBehaviour
     {
         Conductor.Instance.OnBeat -= OnBeatReceived;
     }
-    
+
+    void Update()
+    {
+        if (isMoving)
+        {
+            moveTimer += Time.deltaTime;
+            float t = Mathf.Clamp01(moveTimer / moveDuration);
+            transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+
+            if (t >= 1f)
+            {
+                isMoving = false;
+            }
+        }
+    }
 
     void OnBeatReceived()
     {
         beatCounter++;
-
-        if (beatCounter >= beatsPerMove)
+        if (beatCounter >= beatsPerMove && !isMoving)
         {
-            Move();
+            Vector2Int direction = Move();
+            StartMove(direction);
             beatCounter = 0;
+
+            /*Move();
+            beatCounter = 0;*/
         }
     }
 
-    void Move()
+    Vector2Int Move()
     {
 
         Vector2Int direction = Vector2Int.zero;
-        
 
-        
-            switch (pattern)
-            {
-                case PatternType.UpDown:
-                    if (movingRight)
-                    {
-                        direction = Vector2Int.up;
-                    }
-                    else
-                    {
-                        direction = Vector2Int.down;
-                    }
-                    movingRight = !movingRight;
 
-                    break;
 
-                case PatternType.Square:
-                
+        switch (pattern)
+        {
+            case PatternType.UpDown:
+                if (movingRight)
+                {
+                    direction = Vector2Int.up;
+                }
+                else
+                {
+                    direction = Vector2Int.down;
+                }
+                movingRight = !movingRight;
+
+                break;
+
+            case PatternType.Square:
+
                 direction = squarePattern[squareStep];
                 squareStep = (squareStep + 1);
                 if (squareStep == 4)
@@ -93,7 +114,7 @@ public class EnemyContoller : MonoBehaviour
                 break;
 
             case PatternType.Square2:
-                
+
                 direction = squarePattern[squareStep2];
                 squareStep2 = (squareStep2 + 1) % squarePattern.Length;
                 if (squareStep2 == 4)
@@ -103,7 +124,6 @@ public class EnemyContoller : MonoBehaviour
                 break;
 
             case PatternType.LeftRight:
-
 
                 if (movingRight)
                 {
@@ -116,15 +136,14 @@ public class EnemyContoller : MonoBehaviour
                 movingRight = !movingRight;
 
                 break;
-        }
-
-
-        
-            transform.position += (Vector3)(Vector2)direction * moveDistance;
-        
+        }        
+        return direction;
     }
-
-    
-
-
+    void StartMove(Vector2Int direction)
+    {
+        startPosition = transform.position;
+        targetPosition = transform.position + (Vector3)(Vector2)direction * moveDistance;
+        moveTimer = 0f;
+        isMoving = true;
+    }
 }
