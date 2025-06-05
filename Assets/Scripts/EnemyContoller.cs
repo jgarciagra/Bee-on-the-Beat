@@ -40,7 +40,7 @@ public class EnemyContoller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        /*if (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             PlayerController player = other.GetComponent<PlayerController>();
 
@@ -49,7 +49,7 @@ public class EnemyContoller : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
-        */
+        
         if (other.CompareTag("Player"))
         {
             playerRef = other.GetComponent<PlayerController>();

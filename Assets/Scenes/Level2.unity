@@ -401,6 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 1
   beatLeeway: 0.3
+  moveDuration: 0.15
 --- !u!212 &250839826
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2470,7 +2471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d44647b02988945890b3422ffa6c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextScene: 
+  nextScene: ScoreScreen2
 --- !u!4 &1215056268
 Transform:
   m_ObjectHideFlags: 0
