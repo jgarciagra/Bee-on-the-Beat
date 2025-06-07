@@ -26,10 +26,12 @@ public class PlayerController : MonoBehaviour
         Conductor.Instance.OnBeat -= AllowMove;
     }
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    
 
     void Update()
     {
@@ -105,8 +107,5 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    public bool IsMoving()
-    {
-        return isMoving;
-    }
+    
 }

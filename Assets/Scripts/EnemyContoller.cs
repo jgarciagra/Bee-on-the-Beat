@@ -13,7 +13,7 @@ public class EnemyContoller : MonoBehaviour
     private int beatCounter = 0;
 
     public float moveDistance = 1f;
-    public float moveDuration = 0.15f;
+    public float moveDuration = 0.0015f;
 
     private bool movingRight = true;
 
@@ -33,39 +33,19 @@ public class EnemyContoller : MonoBehaviour
     private Vector3 targetPosition;
     private float moveTimer = 0f;
 
-    private float contactTimer = 0f;
-    private float contactThreshold = 0.01f;
     private bool playerInside = false;
     private PlayerController playerRef;
 
-    void OnTriggerEnter2D(Collider2D other)
+    /*void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-
-            if (player != null && !player.IsMoving())
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
-        }
+            PlayerController player = other.GetComponent<PlayerController>();            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);            
+        }        
         
-        if (other.CompareTag("Player"))
-        {
-            playerRef = other.GetComponent<PlayerController>();
-            playerInside = true;
-            contactTimer = 0f;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInside = false;
-            contactTimer = 0f;
-        }
-    }
+    }*/
+    
 
     void OnEnable()
     {
@@ -88,39 +68,39 @@ public class EnemyContoller : MonoBehaviour
             if (t >= 1f)
             {
                 isMoving = false;
-            }
 
-            if (!playerRef.IsMoving() && !isMoving)
-            {
-                contactTimer += Time.deltaTime;
-                if (contactTimer >= contactThreshold)
-                {
-                    float distance = Vector2.Distance(transform.position, playerRef.transform.position);
-                    if (distance < 0.1f) 
-                    {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                    }
-                    else
-                    {                        
-                        contactTimer = 0f;
-                        playerInside = false;
-                    }
-                }
-            }
+                CheckPlayerCollision(targetPosition);
+
+                
+            }            
+            float distance = Vector2.Distance(transform.position, playerRef.transform.position);
+                    
         }
     }
 
     void OnBeatReceived()
     {
         beatCounter++;
-        if (beatCounter >= beatsPerMove && !isMoving)
+
+        if (beatCounter >= beatsPerMove)
         {
             Vector2Int direction = Move();
-            StartMove(direction);
             beatCounter = 0;
 
-            /*Move();
-            beatCounter = 0;*/
+            if (direction == Vector2Int.zero)
+            {
+                
+                CheckPlayerCollision(transform.position);
+            }
+            else
+            {
+                StartMove(direction);
+            }
+        }
+        else
+        {
+            
+            CheckPlayerCollision(transform.position);
         }
     }
 
@@ -188,5 +168,25 @@ public class EnemyContoller : MonoBehaviour
         targetPosition = transform.position + (Vector3)(Vector2)direction * moveDistance;
         moveTimer = 0f;
         isMoving = true;
+
+        CheckPlayerCollision(startPosition);
     }
+
+    void CheckPlayerCollision(Vector3 positionToCheck)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            float distance = Vector2.Distance(positionToCheck, player.transform.position);
+            if (distance < 0.05f)
+            {
+                PlayerController pc = player.GetComponent<PlayerController>();
+                if (pc != null)
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }
+            }
+        }
+    }
+
 }
