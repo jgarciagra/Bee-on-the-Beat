@@ -99,5 +99,18 @@ public class ScoreManager : MonoBehaviour
     {
         return multiplier;
     }
+    void FinishLevel1()
+    {
+        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
+        LevelStats.Instance.time = Time.timeSinceLevelLoad;
 
+        SceneManager.LoadScene("ScoreScreen1");
+    }
+    void FinishLevel2()
+    {
+        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
+        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+
+        SceneManager.LoadScene("ScoreScreen2");
+    }
 }
