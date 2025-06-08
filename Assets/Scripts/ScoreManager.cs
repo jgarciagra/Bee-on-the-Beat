@@ -100,14 +100,27 @@ public class ScoreManager : MonoBehaviour
         return multiplier;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> parent of 773c4ed (score screen fix)
     void FinishLevel1()
     {
         LevelStats.Instance.score = ScoreManager.Instance.GetScore();
         LevelStats.Instance.time = Time.timeSinceLevelLoad;
 
         SceneManager.LoadScene("ScoreScreen1");
+<<<<<<< HEAD
+=======
+    }
+    void FinishLevel2()
+    {
+        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
+        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+
+        SceneManager.LoadScene("ScoreScreen2");
+>>>>>>> parent of 773c4ed (score screen fix)
     }
     void FinishLevel2()
     {
