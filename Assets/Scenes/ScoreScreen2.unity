@@ -669,6 +669,7 @@ SceneRoots:
   m_Roots:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1089759307}
   - {fileID: 959695131}
   - {fileID: 1509951470}
@@ -682,3 +683,8 @@ SceneRoots:
   - {fileID: 1630438975}
   - {fileID: 1669913912}
 >>>>>>> parent of 773c4ed (score screen fix)
+=======
+  - {fileID: 1089759307}
+  - {fileID: 959695131}
+  - {fileID: 1509951470}
+>>>>>>> parent of 18dc66d (score screen update)

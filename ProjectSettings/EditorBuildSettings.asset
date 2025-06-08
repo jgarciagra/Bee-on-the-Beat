@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Final.unity
     guid: 7d5b76d7917db294db7b1e6221e7eb6a
   - enabled: 1
-    path: Assets/Scenes/Settings.unity
+    path: Assets/Scenes/SettingsMenu.unity
     guid: 5134bd0ee1e838e488347d3fb9af6dc5
   - enabled: 1
     path: Assets/Scenes/ScoreScreen1.unity

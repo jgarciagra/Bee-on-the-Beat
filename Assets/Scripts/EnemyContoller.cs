@@ -13,7 +13,7 @@ public class EnemyContoller : MonoBehaviour
     private int beatCounter = 0;
 
     public float moveDistance = 1f;
-    public float moveDuration = 0.1f;
+    public float moveDuration = 1f;
 
     private bool movingRight = true;
 
@@ -71,7 +71,20 @@ public class EnemyContoller : MonoBehaviour
 
                 CheckPlayerCollision(targetPosition);
 
-                
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                if (player != null)
+                {
+                    float distsance = Vector2.Distance(transform.position, player.transform.position);
+                    if (distsance < 0.05f) // puedes ajustar esta tolerancia
+                    {
+                        PlayerController pc = player.GetComponent<PlayerController>();
+                        if (pc != null ) // si usas power-ups de invencibilidad
+                        {
+                            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                        }
+                    }
+                }
+
             }            
             float distance = Vector2.Distance(transform.position, playerRef.transform.position);
                     
@@ -178,13 +191,10 @@ public class EnemyContoller : MonoBehaviour
         if (player != null)
         {
             float distance = Vector2.Distance(positionToCheck, player.transform.position);
-            
-
-            if (distance < 0.2f)
+            if (distance < 0.05f)
             {
-                
-                PlayerController p = player.GetComponent<PlayerController>();
-                if (p != null)
+                PlayerController pc = player.GetComponent<PlayerController>();
+                if (pc != null)
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
