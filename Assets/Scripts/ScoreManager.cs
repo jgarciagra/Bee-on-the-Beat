@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -22,20 +21,13 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         levelStartTime = Time.time;
-        Time.timeScale = 1f;
     }
 
     private void Awake()
     {
         if (Instance == null)
-        {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
     public void RegisterHit(HitAccuracy accuracy)
@@ -107,27 +99,5 @@ public class ScoreManager : MonoBehaviour
     {
         return multiplier;
     }
-    public void FinishLevel(string scoreSceneName)
-    {
-        float levelTime = Time.time - levelStartTime;
-                
-        if (LevelStats.Instance != null)
-        {
-            LevelStats.Instance.SetStats(score, levelTime);
-        }
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        string scoreScreenName = "";
 
-        if (currentSceneName.Contains("Level"))
-        {
-            string levelNumber = currentSceneName.Replace("Level", "");
-            scoreScreenName = "ScoreScreen" + levelNumber;
-        }
-        else
-        {
-            scoreScreenName = "ScoreScreen";
-        }
-
-        SceneManager.LoadScene(scoreScreenName);
-    }
 }
