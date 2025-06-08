@@ -13,7 +13,7 @@ public class EnemyContoller : MonoBehaviour
     private int beatCounter = 0;
 
     public float moveDistance = 1f;
-    public float moveDuration = 0.0015f;
+    public float moveDuration = 0.1f;
 
     private bool movingRight = true;
 
@@ -178,10 +178,13 @@ public class EnemyContoller : MonoBehaviour
         if (player != null)
         {
             float distance = Vector2.Distance(positionToCheck, player.transform.position);
-            if (distance < 0.05f)
+            
+
+            if (distance < 0.2f)
             {
-                PlayerController pc = player.GetComponent<PlayerController>();
-                if (pc != null)
+                
+                PlayerController p = player.GetComponent<PlayerController>();
+                if (p != null)
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
