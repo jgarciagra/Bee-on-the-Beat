@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3747503713319923829}
   - component: {fileID: 3657131488423800888}
   - component: {fileID: 6496703149041260991}
-  - component: {fileID: 7412400780213316463}
   - component: {fileID: 3471267624285148632}
+  - component: {fileID: 7412400780213316463}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -102,6 +102,34 @@ MonoBehaviour:
   pattern: 2
   beatsPerMove: 1
   moveDistance: 1
+  moveDuration: 0.1
+--- !u!50 &3471267624285148632
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6294339837831965930}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &7412400780213316463
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,30 +175,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8800527, y: 0.9099182}
   m_EdgeRadius: 0
---- !u!50 &3471267624285148632
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6294339837831965930}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
