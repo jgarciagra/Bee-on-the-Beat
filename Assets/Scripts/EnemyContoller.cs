@@ -70,7 +70,6 @@ public class EnemyContoller : MonoBehaviour
                 isMoving = false;
 
                 CheckPlayerCollision(targetPosition);
-
                 
             }            
             float distance = Vector2.Distance(transform.position, playerRef.transform.position);
