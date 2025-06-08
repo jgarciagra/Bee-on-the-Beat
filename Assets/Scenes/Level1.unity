@@ -187,6 +187,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: movementPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: e0ca0ad678b45d34d90fc0213c5b3b48, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1740,6 +1744,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: startStep
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: movementPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: e0ca0ad678b45d34d90fc0213c5b3b48, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2142,6 +2154,14 @@ PrefabInstance:
       propertyPath: beatsPerMove
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: moveDuration
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: movementPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: 05b779b56afef544fad301b4716405dd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2578,7 +2598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3747503713319923829, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3747503713319923829, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2625,6 +2645,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: initialUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -2632,6 +2656,10 @@ PrefabInstance:
       propertyPath: beatsPerMove
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: movementPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: 05b779b56afef544fad301b4716405dd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
