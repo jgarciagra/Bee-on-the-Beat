@@ -39,8 +39,8 @@ public class PlayerController : MonoBehaviour
 
         Vector2 inputDirection = Vector2.zero;
 
-        if (Input.GetKeyDown(KeyCode.W)) { inputDirection = Vector2.up; Debug.Log("Input detectado"); }
-            if (Input.GetKeyDown(KeyCode.S)) inputDirection = Vector2.down;
+        if (Input.GetKeyDown(KeyCode.W)) inputDirection = Vector2.up;
+        if (Input.GetKeyDown(KeyCode.S)) inputDirection = Vector2.down;
         if (Input.GetKeyDown(KeyCode.A)) inputDirection = Vector2.left;
         if (Input.GetKeyDown(KeyCode.D)) inputDirection = Vector2.right;
 

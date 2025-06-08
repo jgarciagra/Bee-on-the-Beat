@@ -21,6 +21,15 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        if (LevelStats.Instance != null)
+        {
+            LevelStats.Instance.ResetStats();
+        }
+
+        score = 0;
+        multiplier = 1;
+        streak = 0;
+
         levelStartTime = Time.time;
         Time.timeScale = 1f;
     }
@@ -30,7 +39,7 @@ public class ScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+
         }
         else
         {
@@ -40,7 +49,7 @@ public class ScoreManager : MonoBehaviour
 
     public void RegisterHit(HitAccuracy accuracy)
     {
-        
+
 
         switch (accuracy)
         {
@@ -77,11 +86,11 @@ public class ScoreManager : MonoBehaviour
         if (levelTime < 30f)
             bonus = score;
         else if (levelTime < 45f)
-            bonus = score/2;
+            bonus = score / 2;
         else if (levelTime < 60f)
             bonus = 0;
         else
-            bonus = -Mathf.RoundToInt(score * 0.7f); 
+            bonus = -Mathf.RoundToInt(score * 0.7f);
 
         score += bonus;
     }
@@ -89,13 +98,13 @@ public class ScoreManager : MonoBehaviour
     void AddPoints(int amount)
     {
         score += amount;
-        
+
     }
 
     void SubtractPoints(int amount)
     {
         score = Mathf.Max(0, score - amount);
-        
+
     }
 
     public int GetScore()
@@ -110,7 +119,7 @@ public class ScoreManager : MonoBehaviour
     public void FinishLevel(string scoreSceneName)
     {
         float levelTime = Time.time - levelStartTime;
-                
+
         if (LevelStats.Instance != null)
         {
             LevelStats.Instance.SetStats(score, levelTime);

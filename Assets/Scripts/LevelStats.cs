@@ -21,6 +21,11 @@ public class LevelStats : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void ResetStats()
+    {
+        Score = 0;
+        LevelTime = 0f;
+    }
 
     public void SetStats(int score, float time)
     {
