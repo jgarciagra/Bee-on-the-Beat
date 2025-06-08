@@ -6,10 +6,10 @@ public class LevelStats : MonoBehaviour
 {
     public static LevelStats Instance;
 
-    public int score;
-    public float time;
+    public int Score { get; private set; }
+    public float LevelTime { get; private set; }
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null)
         {
@@ -20,5 +20,11 @@ public class LevelStats : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetStats(int score, float time)
+    {
+        Score = score;
+        LevelTime = time;
     }
 }

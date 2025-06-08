@@ -22,13 +22,20 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         levelStartTime = Time.time;
+        Time.timeScale = 1f;
     }
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else Destroy(gameObject);
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void RegisterHit(HitAccuracy accuracy)
@@ -100,18 +107,27 @@ public class ScoreManager : MonoBehaviour
     {
         return multiplier;
     }
-    void FinishLevel1()
+    public void FinishLevel(string scoreSceneName)
     {
-        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
-        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+        float levelTime = Time.time - levelStartTime;
+                
+        if (LevelStats.Instance != null)
+        {
+            LevelStats.Instance.SetStats(score, levelTime);
+        }
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string scoreScreenName = "";
 
-        SceneManager.LoadScene("ScoreScreen1");
-    }
-    void FinishLevel2()
-    {
-        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
-        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+        if (currentSceneName.Contains("Level"))
+        {
+            string levelNumber = currentSceneName.Replace("Level", "");
+            scoreScreenName = "ScoreScreen" + levelNumber;
+        }
+        else
+        {
+            scoreScreenName = "ScoreScreen";
+        }
 
-        SceneManager.LoadScene("ScoreScreen2");
+        SceneManager.LoadScene(scoreScreenName);
     }
 }
