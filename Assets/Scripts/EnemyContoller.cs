@@ -6,8 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class EnemyContoller : MonoBehaviour
 {
-    public enum PatternType { UpDown, Square, Square2, LeftRight }
-    public PatternType pattern;
+    public EnemyPattern movementPattern;
+
+    
+    public int startStep = 0;
+    [HideInInspector] public int customStep = 0;
+
+    public bool initialUp = true;
+    public bool initialRight = true;
+    [HideInInspector] public bool customState = true;
+
+    [HideInInspector] public bool hasPatternInitialized = false;
 
     public int beatsPerMove = 2;
     private int beatCounter = 0;
@@ -15,18 +24,7 @@ public class EnemyContoller : MonoBehaviour
     public float moveDistance = 1f;
     public float moveDuration = 1f;
 
-    private bool movingRight = true;
-
-    private int squareStep = 0;
-    private int squareStep2 = 1;
-
-    private Vector2Int[] squarePattern = new Vector2Int[]
-    {
-    Vector2Int.up,
-    Vector2Int.right,
-    Vector2Int.down,
-    Vector2Int.left
-    };
+    private bool movingRight = true;    
 
     private bool isMoving = false;
     private Vector3 startPosition;
@@ -120,60 +118,10 @@ public class EnemyContoller : MonoBehaviour
     Vector2Int Move()
     {
 
-        Vector2Int direction = Vector2Int.zero;
+        if (movementPattern == null)
+            return Vector2Int.zero;
 
-
-
-        switch (pattern)
-        {
-            case PatternType.UpDown:
-                if (movingRight)
-                {
-                    direction = Vector2Int.up;
-                }
-                else
-                {
-                    direction = Vector2Int.down;
-                }
-                movingRight = !movingRight;
-
-                break;
-
-            case PatternType.Square:
-
-                direction = squarePattern[squareStep];
-                squareStep = (squareStep + 1);
-                if (squareStep == 4)
-                {
-                    squareStep -= 4;
-                }
-                break;
-
-            case PatternType.Square2:
-
-                direction = squarePattern[squareStep2];
-                squareStep2 = (squareStep2 + 1) % squarePattern.Length;
-                if (squareStep2 == 4)
-                {
-                    squareStep2 -= 4;
-                }
-                break;
-
-            case PatternType.LeftRight:
-
-                if (movingRight)
-                {
-                    direction = Vector2Int.right;
-                }
-                else
-                {
-                    direction = Vector2Int.left;
-                }
-                movingRight = !movingRight;
-
-                break;
-        }        
-        return direction;
+        return movementPattern.GetDirection(this);
     }
     void StartMove(Vector2Int direction)
     {

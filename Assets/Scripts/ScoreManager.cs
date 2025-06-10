@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -20,19 +21,35 @@ public class ScoreManager : MonoBehaviour
 
     void Start()
     {
+        if (LevelStats.Instance != null)
+        {
+            LevelStats.Instance.ResetStats();
+        }
+
+        score = 0;
+        multiplier = 1;
+        streak = 0;
+
         levelStartTime = Time.time;
+        Time.timeScale = 1f;
     }
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else Destroy(gameObject);
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void RegisterHit(HitAccuracy accuracy)
     {
-        
+
 
         switch (accuracy)
         {
@@ -69,11 +86,11 @@ public class ScoreManager : MonoBehaviour
         if (levelTime < 30f)
             bonus = score;
         else if (levelTime < 45f)
-            bonus = score/2;
+            bonus = score / 2;
         else if (levelTime < 60f)
             bonus = 0;
         else
-            bonus = -Mathf.RoundToInt(score * 0.7f); 
+            bonus = -Mathf.RoundToInt(score * 0.7f);
 
         score += bonus;
     }
@@ -81,13 +98,13 @@ public class ScoreManager : MonoBehaviour
     void AddPoints(int amount)
     {
         score += amount;
-        
+
     }
 
     void SubtractPoints(int amount)
     {
         score = Mathf.Max(0, score - amount);
-        
+
     }
 
     public int GetScore()
@@ -99,48 +116,27 @@ public class ScoreManager : MonoBehaviour
     {
         return multiplier;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> parent of 773c4ed (score screen fix)
-=======
->>>>>>> parent of 773c4ed (score screen fix)
-    void FinishLevel1()
+    public void FinishLevel(string scoreSceneName)
     {
-        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
-        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+        float levelTime = Time.time - levelStartTime;
 
-        SceneManager.LoadScene("ScoreScreen1");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
-    }
-    void FinishLevel2()
-    {
-        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
-        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+        if (LevelStats.Instance != null)
+        {
+            LevelStats.Instance.SetStats(score, levelTime);
+        }
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        string scoreScreenName = "";
 
-        SceneManager.LoadScene("ScoreScreen2");
->>>>>>> parent of 773c4ed (score screen fix)
-    }
-    void FinishLevel2()
-    {
-        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
-        LevelStats.Instance.time = Time.timeSinceLevelLoad;
+        if (currentSceneName.Contains("Level"))
+        {
+            string levelNumber = currentSceneName.Replace("Level", "");
+            scoreScreenName = "ScoreScreen" + levelNumber;
+        }
+        else
+        {
+            scoreScreenName = "ScoreScreen";
+        }
 
-        SceneManager.LoadScene("ScoreScreen2");
->>>>>>> parent of 773c4ed (score screen fix)
+        SceneManager.LoadScene(scoreScreenName);
     }
-    void FinishLevel2()
-    {
-        LevelStats.Instance.score = ScoreManager.Instance.GetScore();
-        LevelStats.Instance.time = Time.timeSinceLevelLoad;
-
-        SceneManager.LoadScene("ScoreScreen2");
-    }
->>>>>>> parent of 773c4ed (score screen fix)
 }
