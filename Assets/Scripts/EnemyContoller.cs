@@ -8,15 +8,12 @@ public class EnemyContoller : MonoBehaviour
 {
     public EnemyPattern movementPattern;
 
-    
-    public int startStep = 0;
-    [HideInInspector] public int customStep = 0;
+    private IEnemyPattern patternInstance;
+        
 
     public bool initialUp = true;
     public bool initialRight = true;
-    [HideInInspector] public bool customState = true;
-
-    [HideInInspector] public bool hasPatternInitialized = false;
+    
 
     public int beatsPerMove = 2;
     private int beatCounter = 0;
@@ -101,14 +98,17 @@ public class EnemyContoller : MonoBehaviour
             CheckPlayerCollision(transform.position);
         }
     }
+    void Start()
+    {
+        patternInstance = movementPattern.CreateInstance();
+        patternInstance.Initialize(this);
+    }
 
     Vector2Int Move()
     {
 
-        if (movementPattern == null)
-            return Vector2Int.zero;
-
-        return movementPattern.GetDirection(this);
+        if (patternInstance == null) return Vector2Int.zero;
+        return patternInstance.GetDirection();
     }
     void StartMove(Vector2Int direction)
     {
