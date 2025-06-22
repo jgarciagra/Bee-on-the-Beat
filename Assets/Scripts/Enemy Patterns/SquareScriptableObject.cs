@@ -12,11 +12,11 @@ public enum StartDirection
 [CreateAssetMenu(menuName = "Enemy Patterns/Square")]
 public class SquareScriptableObject : EnemyPattern
 {
-    public int distance;
+    
     public StartDirection initialDirection;
 
     public override IEnemyPattern CreateInstance()
     {
-        return new Square(distance, (int)initialDirection);
+        return new Square(1, (int)initialDirection);
     }
 }

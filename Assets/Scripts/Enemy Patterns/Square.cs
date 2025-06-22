@@ -30,6 +30,8 @@ public class Square : IEnemyPattern
 
     public Vector2Int GetDirection()
     {
+        Vector2Int direction = directions[currentDirIndex];
+
         stepCounter++;
         if (stepCounter >= distance)
         {
@@ -37,6 +39,6 @@ public class Square : IEnemyPattern
             currentDirIndex = (currentDirIndex + 1) % directions.Length;
         }
 
-        return directions[currentDirIndex];
+        return direction;
     }
 }
