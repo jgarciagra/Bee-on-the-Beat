@@ -1,27 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-public class LeftRight : IEnemyPattern
+[CreateAssetMenu(menuName = "Enemy Patterns/LeftRight")]
+public class LeftRight : EnemyPattern
 {
-    private bool state;
-    private bool initialRight;
-
-    public void Initialize(EnemyContoller enemy)
+    public override Vector2Int GetDirection(EnemyContoller enemy)
     {
-        initialRight = enemy.initialRight;
-        state = initialRight;
-    }
+        if (!enemy.hasPatternInitialized)
+        {
+            enemy.customState = enemy.initialRight;
+            enemy.hasPatternInitialized = true;
+        }
 
-    public Vector2Int GetDirection()
-    {
         Vector2Int dir;
-        if (state)
-        {
+
+        if (enemy.customState)
             dir = Vector2Int.right;
-        }
         else
-        {
             dir = Vector2Int.left;
-        }
-        state = !state;
+
+        enemy.customState = !enemy.customState;
         return dir;
     }
 }

@@ -1,9 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static ScoreManager;
 
 public class ScoreUI : MonoBehaviour
 {
+
     public static ScoreUI Instance;
 
     public TextMeshProUGUI scoreText;
@@ -23,6 +26,7 @@ public class ScoreUI : MonoBehaviour
 
     private void Update()
     {
+        
         if (feedbackText.text != "")
         {
             feedbackTimer -= Time.deltaTime;

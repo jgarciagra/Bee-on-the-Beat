@@ -1,42 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Square : IEnemyPattern
+[CreateAssetMenu(menuName = "Enemy Patterns/Square")]
+public class Square : EnemyPattern
 {
-    private Vector2Int[] directions = new Vector2Int[]
-    {
+    private static readonly Vector2Int[] directions = {
+        Vector2Int.up,
         Vector2Int.right,
         Vector2Int.down,
-        Vector2Int.left,
-        Vector2Int.up
+        Vector2Int.left
     };
 
-    private int currentDirIndex;
-    private int stepCounter;
-    private int distance;
-
-    public Square(int distance, int startIndex)
+    public override Vector2Int GetDirection(EnemyContoller enemy)
     {
-        this.distance = distance;
-        this.currentDirIndex = startIndex % directions.Length;
-        this.stepCounter = 0;
-    }
-
-    public void Initialize(EnemyContoller enemy)
-    {
-        
-    }
-
-    public Vector2Int GetDirection()
-    {
-        Vector2Int direction = directions[currentDirIndex];
-
-        stepCounter++;
-        if (stepCounter >= distance)
+        if (!enemy.hasPatternInitialized)
         {
-            stepCounter = 0;
-            currentDirIndex = (currentDirIndex + 1) % directions.Length;
+            enemy.customStep = enemy.startStep % directions.Length;
+            enemy.hasPatternInitialized = true;
         }
 
-        return direction;
+        Vector2Int dir = directions[enemy.customStep];
+        enemy.customStep = (enemy.customStep + 1) % directions.Length;
+        return dir;
     }
 }

@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpDown : IEnemyPattern
+[CreateAssetMenu(menuName = "Enemy Patterns/UpDown")]
+public class UpDown : EnemyPattern
 {
-    private bool state;
-    private bool initialUp;
-
-    public void Initialize(EnemyContoller enemy)
+    
+    public override Vector2Int GetDirection(EnemyContoller enemy)
     {
-        initialUp = enemy.initialUp;
-        state = initialUp;
-    }
-
-    public Vector2Int GetDirection()
-    {
+        if (!enemy.hasPatternInitialized)
+        {
+            enemy.customState = enemy.initialUp;
+            enemy.hasPatternInitialized = true;
+        }
         Vector2Int dir;
-        if (state)
+
+        if (enemy.customState)
         {
             dir = Vector2Int.up;
         }
@@ -24,7 +23,9 @@ public class UpDown : IEnemyPattern
         {
             dir = Vector2Int.down;
         }
-        state = !state;
+
+        enemy.customState = !enemy.customState;
         return dir;
     }
+
 }

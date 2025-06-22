@@ -1,10 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
-
     public enum HitAccuracy
     {
         Perfect,
@@ -17,18 +18,6 @@ public class ScoreManager : MonoBehaviour
     private int streak = 0;
     private int maxMultiplier = 5;
     private float levelStartTime;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Start()
     {
@@ -45,8 +34,23 @@ public class ScoreManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public void RegisterHit(HitAccuracy accuracy)
     {
+
+
         switch (accuracy)
         {
             case HitAccuracy.Perfect:
@@ -76,6 +80,7 @@ public class ScoreManager : MonoBehaviour
     public void RegisterLevelCompletion()
     {
         float levelTime = Time.time - levelStartTime;
+
         int bonus = 0;
 
         if (levelTime < 30f)
@@ -93,11 +98,13 @@ public class ScoreManager : MonoBehaviour
     void AddPoints(int amount)
     {
         score += amount;
+
     }
 
     void SubtractPoints(int amount)
     {
         score = Mathf.Max(0, score - amount);
+
     }
 
     public int GetScore()
@@ -109,7 +116,6 @@ public class ScoreManager : MonoBehaviour
     {
         return multiplier;
     }
-
     public void FinishLevel(string scoreSceneName)
     {
         float levelTime = Time.time - levelStartTime;
@@ -118,7 +124,6 @@ public class ScoreManager : MonoBehaviour
         {
             LevelStats.Instance.SetStats(score, levelTime);
         }
-
         string currentSceneName = SceneManager.GetActiveScene().name;
         string scoreScreenName = "";
 
