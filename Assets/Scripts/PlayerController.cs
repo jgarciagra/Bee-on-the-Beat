@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canMove = false;
     private bool isMoving = false;
+    private bool inputReceived = false;
+
 
     private Rigidbody2D rb;
 
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         if (inputDirection != Vector2.zero)
         {
+            inputReceived = true;
             float distanceToBeat = Mathf.Min(
                 Conductor.Instance.GetTimeSinceLastBeat(),
                 Conductor.Instance.secPerBeat - Conductor.Instance.GetTimeSinceLastBeat()
@@ -61,9 +64,18 @@ public class PlayerController : MonoBehaviour
                 else
                     accuracy = HitAccuracy.Miss;
 
-                ScoreManager.Instance.RegisterHit(accuracy);
+                bool blocked = IsBlocked(inputDirection);
 
-                if (accuracy != HitAccuracy.Miss && !IsBlocked(inputDirection))
+                if (blocked)
+                {
+                    ScoreManager.Instance.RegisterHit(HitAccuracy.Miss);
+                }
+                else
+                {
+                    ScoreManager.Instance.RegisterHit(accuracy);
+                }
+
+                if (!blocked && accuracy != HitAccuracy.Miss)
                 {
                     Vector2 targetPosition = rb.position + inputDirection.normalized * moveDistance;
                     StartCoroutine(LerpMove(targetPosition));
@@ -82,7 +94,10 @@ public class PlayerController : MonoBehaviour
 
     void AllowMove()
     {
+        inputReceived = false;
         canMove = true;
+
+        StartCoroutine(DetectIdleMiss());
     }
 
     bool IsBlocked(Vector2 direction)
@@ -108,5 +123,15 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    
+    IEnumerator DetectIdleMiss()
+    {
+        yield return new WaitForSeconds(beatLeeway);
+
+        if (!inputReceived && canMove)
+        {
+            ScoreManager.Instance.RegisterHit(HitAccuracy.Miss);
+            canMove = false;
+        }
+    }
+
 }
