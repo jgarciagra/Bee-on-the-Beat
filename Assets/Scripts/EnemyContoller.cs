@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,42 +5,18 @@ public class EnemyContoller : MonoBehaviour
 {
     public EnemyPattern movementPattern;
 
-    
-    public int startStep = 0;
-    [HideInInspector] public int customStep = 0;
-
     public bool initialUp = true;
     public bool initialRight = true;
-    [HideInInspector] public bool customState = true;
-
-    [HideInInspector] public bool hasPatternInitialized = false;
-
     public int beatsPerMove = 2;
-    private int beatCounter = 0;
-
     public float moveDistance = 1f;
-    public float moveDuration = 1f;
+    public float moveDuration = 0.1f;
 
-    private bool movingRight = true;    
-
+    private IEnemyPattern patternInstance;
+    private int beatCounter = 0;
     private bool isMoving = false;
     private Vector3 startPosition;
     private Vector3 targetPosition;
     private float moveTimer = 0f;
-
-    private bool playerInside = false;
-    private PlayerController playerRef;
-
-    /*void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            PlayerController player = other.GetComponent<PlayerController>();            
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);            
-        }        
-        
-    }*/
-    
 
     void OnEnable()
     {
@@ -53,6 +26,12 @@ public class EnemyContoller : MonoBehaviour
     void OnDisable()
     {
         Conductor.Instance.OnBeat -= OnBeatReceived;
+    }
+
+    void Start()
+    {
+        patternInstance = movementPattern.CreateInstance();
+        patternInstance.Initialize(this);
     }
 
     void Update()
@@ -66,26 +45,8 @@ public class EnemyContoller : MonoBehaviour
             if (t >= 1f)
             {
                 isMoving = false;
-
                 CheckPlayerCollision(targetPosition);
-
-                GameObject player = GameObject.FindGameObjectWithTag("Player");
-                if (player != null)
-                {
-                    float distsance = Vector2.Distance(transform.position, player.transform.position);
-                    if (distsance < 0.05f) // puedes ajustar esta tolerancia
-                    {
-                        PlayerController pc = player.GetComponent<PlayerController>();
-                        if (pc != null ) // si usas power-ups de invencibilidad
-                        {
-                            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                        }
-                    }
-                }
-
-            }            
-            float distance = Vector2.Distance(transform.position, playerRef.transform.position);
-                    
+            }
         }
     }
 
@@ -100,7 +61,6 @@ public class EnemyContoller : MonoBehaviour
 
             if (direction == Vector2Int.zero)
             {
-                
                 CheckPlayerCollision(transform.position);
             }
             else
@@ -110,19 +70,16 @@ public class EnemyContoller : MonoBehaviour
         }
         else
         {
-            
             CheckPlayerCollision(transform.position);
         }
     }
 
     Vector2Int Move()
     {
-
-        if (movementPattern == null)
-            return Vector2Int.zero;
-
-        return movementPattern.GetDirection(this);
+        if (patternInstance == null) return Vector2Int.zero;
+        return patternInstance.GetDirection();
     }
+
     void StartMove(Vector2Int direction)
     {
         startPosition = transform.position;
@@ -139,15 +96,14 @@ public class EnemyContoller : MonoBehaviour
         if (player != null)
         {
             float distance = Vector2.Distance(positionToCheck, player.transform.position);
-            if (distance < 0.05f)
+            if (distance < 0.2f)
             {
-                PlayerController pc = player.GetComponent<PlayerController>();
-                if (pc != null)
+                PlayerController p = player.GetComponent<PlayerController>();
+                if (p != null)
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
             }
         }
     }
-
 }

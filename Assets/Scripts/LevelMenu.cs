@@ -12,7 +12,7 @@ public class LevelMenu : MonoBehaviour
         previousLevelIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(levelIndex);
     }
-    
+
     public void ReturnToPreviousLevel()
     {
         if (previousLevelIndex >= 0)
