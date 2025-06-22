@@ -13,8 +13,8 @@ public class ScoreDisplay : MonoBehaviour
     {
         if (LevelStats.Instance != null)
         {
-            scoreText.text = "Score: " + LevelStats.Instance.score;
-            timeText.text = "Time: " + LevelStats.Instance.time.ToString("F2") + "s";
+            scoreText.text = "Score: " + LevelStats.Instance.Score;
+            timeText.text = "Time: " + LevelStats.Instance.LevelTime.ToString("F2") + "s";
         }
         else
         {
