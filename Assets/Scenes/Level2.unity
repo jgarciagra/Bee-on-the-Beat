@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: beatsPerMove
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: initialRight
@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 774d74dad1e38bb48871b0c9302addf2, type: 2}
+      objectReference: {fileID: 11400000, guid: 17a75d8820cece342a5aaf50eb88f654, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -432,9 +432,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: initialUp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: startStep
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
+      propertyPath: movementPattern
+      value: 
+      objectReference: {fileID: 11400000, guid: dbf9282903d41534185d9e363ac0befd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -846,7 +854,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: e0ca0ad678b45d34d90fc0213c5b3b48, type: 2}
+      objectReference: {fileID: 11400000, guid: 76ca8f969048bc343b25d3700cc0c90d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -914,7 +922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: beatsPerMove
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: moveDistance
@@ -923,7 +931,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 774d74dad1e38bb48871b0c9302addf2, type: 2}
+      objectReference: {fileID: 11400000, guid: 17a75d8820cece342a5aaf50eb88f654, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2333,7 +2341,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 774d74dad1e38bb48871b0c9302addf2, type: 2}
+      objectReference: {fileID: 11400000, guid: 17a75d8820cece342a5aaf50eb88f654, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2405,12 +2413,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: beatsPerMove
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: e0ca0ad678b45d34d90fc0213c5b3b48, type: 2}
+      objectReference: {fileID: 11400000, guid: c4c4ee81ce921034c98bff9c010209a5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2483,7 +2491,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 05b779b56afef544fad301b4716405dd, type: 2}
+      objectReference: {fileID: 11400000, guid: dbf9282903d41534185d9e363ac0befd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2551,7 +2559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: beatsPerMove
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: moveDistance
@@ -2560,7 +2568,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 774d74dad1e38bb48871b0c9302addf2, type: 2}
+      objectReference: {fileID: 11400000, guid: 17a75d8820cece342a5aaf50eb88f654, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2787,7 +2795,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: e0ca0ad678b45d34d90fc0213c5b3b48, type: 2}
+      objectReference: {fileID: 11400000, guid: 76ca8f969048bc343b25d3700cc0c90d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3026,7 +3034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: beatsPerMove
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: initialRight
@@ -3039,7 +3047,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 774d74dad1e38bb48871b0c9302addf2, type: 2}
+      objectReference: {fileID: 11400000, guid: 17a75d8820cece342a5aaf50eb88f654, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3223,7 +3231,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 05b779b56afef544fad301b4716405dd, type: 2}
+      objectReference: {fileID: 11400000, guid: dbf9282903d41534185d9e363ac0befd, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3291,7 +3299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: beatsPerMove
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: moveDistance
@@ -3300,7 +3308,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: 774d74dad1e38bb48871b0c9302addf2, type: 2}
+      objectReference: {fileID: 11400000, guid: 17a75d8820cece342a5aaf50eb88f654, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3369,7 +3377,7 @@ PrefabInstance:
     - target: {fileID: 6496703149041260991, guid: e1c8a2597c10f8b42be168b6a233babc, type: 3}
       propertyPath: movementPattern
       value: 
-      objectReference: {fileID: 11400000, guid: e0ca0ad678b45d34d90fc0213c5b3b48, type: 2}
+      objectReference: {fileID: 11400000, guid: c4c4ee81ce921034c98bff9c010209a5, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 using static ScoreManager;
 
 public class PlayerController : MonoBehaviour
@@ -26,12 +24,10 @@ public class PlayerController : MonoBehaviour
         Conductor.Instance.OnBeat -= AllowMove;
     }
 
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
-    
 
     void Update()
     {
@@ -77,7 +73,6 @@ public class PlayerController : MonoBehaviour
                 canMove = false;
             }
         }
-        
     }
 
     void AllowMove()
@@ -107,6 +102,4 @@ public class PlayerController : MonoBehaviour
         rb.MovePosition(targetPosition);
         isMoving = false;
     }
-
-    
 }
