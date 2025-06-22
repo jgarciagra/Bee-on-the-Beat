@@ -390,12 +390,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e8226ff6c0bc249942cc097811c51d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBpm: 77.5
-  secPerBeat: 0
-  songPosition: 0
-  songStart: 0
   musicSource: {fileID: 125034955}
+  songBpm: 77.5
   audioOffset: 0.15
+  secPerBeat: 0
+  songStart: 0
+  songPosition: 0
 --- !u!4 &125034957
 Transform:
   m_ObjectHideFlags: 0
@@ -2385,12 +2385,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 684942634}
         m_TargetAssemblyTypeName: LevelMenu, Assembly-CSharp
-        m_MethodName: GoToSettingsMenu
-        m_Mode: 1
+        m_MethodName: GoToLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
